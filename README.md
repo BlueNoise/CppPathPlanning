@@ -8,6 +8,7 @@ Path planning algorithms
 # Requirements
 - Ubuntu 22.04
 - CMake 3.22.1 (Default CMake version with Ubuntu 22.04)
+- GCC 11.4.0 (Default gcc version with Ubuntu 22.04)
 
 # License
 MIT
