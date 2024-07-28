@@ -13,12 +13,13 @@ Path planning algorithms
 - GCC 11.4.0
 - OpenCV 4.5.4
 - GoogleTest 1.11.0-3
+- Doxygen 1.9.1-2ubuntu2
 
 # Dependencies installation
 
 ```bash
 sudo apt update
-sudo apt install libgtest-dev libopencv-dev
+sudo apt install doxygen libgtest-dev libopencv-dev
 ```
 
 # Build
