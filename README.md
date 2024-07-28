@@ -5,10 +5,10 @@
 
 CppPathPlanning is a C++ library for robotics path planning, designed to be used on Linux systems, specifically Ubuntu 22.04. This library provides efficient and robust algorithms for path planning in robotic applications.
 
-# Features
+## Features
 Path planning algorithms
 
-# Requirements
+## Requirements
 - Ubuntu 22.04.4 LTS (Jammy Jellyfish)
 - CMake 3.22.1
 - GCC 11.4.0
@@ -17,16 +17,16 @@ Path planning algorithms
 - Doxygen 1.9.1-2ubuntu2
 - lcov
 
-# Dependencies installation
+## Dependencies installation
 
 ```bash
 sudo apt update
 sudo apt install doxygen lcov libgtest-dev libopencv-dev
 ```
 
-# Build
+## Local Build
 
-Standard build for development
+### Standard build for development
 
 ```bash
 mkdir build && cd build
@@ -35,7 +35,7 @@ make # use -j4 or whatever the number of cores you have to speed up build proces
 sudo make install # if you want to install on your system to be able to use find_package in your own CMake project
 ```
 
-Build for testing and coverage
+### Build for testing and coverage
 
 ```bash
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Coverage
@@ -47,7 +47,7 @@ lcov --remove coverage.info '/usr/*' --output-file coverage.info
 genhtml coverage.info --output-directory coverage-report
 ```
 
-# Usage of CppPathPlanning in your CMake project
+## Usage of CppPathPlanning in your CMake project
 
 ```cmake
 # CMakeLists.txt
@@ -58,8 +58,8 @@ target_link_libraries(your_executable PRIVATE CppPathPlanning::cpp_path_planning
 
 > **Note:** You don't need to use `target_include_directories` for your target. The include directories are already configured correctly by the CppPathPlanning library.
 
-# License
+## License
 MIT
 
-# Issues
+## Issues
 For any questions or issues with the code, please create an issue.

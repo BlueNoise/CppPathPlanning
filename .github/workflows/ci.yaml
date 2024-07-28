@@ -48,9 +48,8 @@ jobs:
         cd build
         genhtml coverage.info --output-directory coverage-report
 
-    - name: Upload coverage report to GitHub Pages
-      if: success()
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Upload coverage report as artifact
+      uses: actions/upload-artifact@v3
       with:
-        github_token: ${{ secrets.GH_PAT }}
-        publish_dir: build/coverage-report
+        name: coverage-report
+        path: build/coverage-report
