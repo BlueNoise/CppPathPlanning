@@ -1,8 +1,10 @@
 #ifndef CPP_PATH_PLANNING_ASTAR_H
 #define CPP_PATH_PLANNING_ASTAR_H
 
+//! @file astar.h
 namespace cpp_path_planning
 {
+    //! @class Create an A* planner
     class AStar
     {
     public:

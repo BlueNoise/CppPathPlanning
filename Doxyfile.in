@@ -1,0 +1,16 @@
+# Project settings
+PROJECT_NAME           = @PROJECT_NAME@
+PROJECT_NUMBER         = @PROJECT_VERSION@
+
+# Input/output settings
+INPUT                  = @CMAKE_SOURCE_DIR@/include
+RECURSIVE              = YES
+OUTPUT_DIRECTORY       = @CMAKE_BINARY_DIR@/doc
+
+# Build settings
+GENERATE_LATEX         = NO
+GENERATE_MAN           = NO
+
+# Source browsing settings
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
