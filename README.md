@@ -1,5 +1,7 @@
 # CppPathPlanning
 
+![Build Status](https://github.com/BlueNoise/CppPathPlanning/actions/workflows/ci.yml/badge.svg)
+
 CppPathPlanning is a C++ library for robotics path planning, designed to be used on Linux systems, specifically Ubuntu 22.04. This library provides efficient and robust algorithms for path planning in robotic applications.
 
 # Features
