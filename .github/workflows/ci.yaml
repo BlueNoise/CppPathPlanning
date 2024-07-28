@@ -38,14 +38,15 @@ jobs:
         lcov --capture --directory . --output-file coverage.info
         lcov --remove coverage.info '/usr/*' --output-file coverage.info
 
+    - name: Display coverage summary
+      run: |
+        cd build
+        lcov --list coverage.info
+
     - name: Generate HTML report
       run: |
         cd build
         genhtml coverage.info --output-directory coverage-report
-
-    - name: Upload coverage to Codecov
-      run: |
-        bash <(curl -s https://codecov.io/bash) -f build/coverage.info
 
     - name: Upload coverage report to GitHub Pages
       if: success()
