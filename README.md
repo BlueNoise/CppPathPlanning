@@ -15,21 +15,36 @@ Path planning algorithms
 - OpenCV 4.5.4
 - GoogleTest 1.11.0-3
 - Doxygen 1.9.1-2ubuntu2
+- lcov
 
 # Dependencies installation
 
 ```bash
 sudo apt update
-sudo apt install doxygen libgtest-dev libopencv-dev
+sudo apt install doxygen lcov libgtest-dev libopencv-dev
 ```
 
 # Build
+
+Standard build for development
 
 ```bash
 mkdir build && cd build
 cmake ..
 make # use -j4 or whatever the number of cores you have to speed up build process
 sudo make install # if you want to install on your system to be able to use find_package in your own CMake project
+```
+
+Build for testing and coverage
+
+```bash
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Coverage
+cmake --build build --config Coverage
+cd build
+ctest -T Test -T Coverage
+lcov --capture --directory . --output-file coverage.info
+lcov --remove coverage.info '/usr/*' --output-file coverage.info
+genhtml coverage.info --output-directory coverage-report
 ```
 
 # Usage of CppPathPlanning in your CMake project

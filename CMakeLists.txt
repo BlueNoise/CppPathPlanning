@@ -11,6 +11,13 @@ find_package(OpenCV REQUIRED)
 # Google Test
 find_package(GTest REQUIRED)
 
+# Add coverage flags
+if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    message(STATUS "Building with code coverage enabled")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -ftest-coverage -O0 --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
 # Note to test OpenCV works as intended
 add_executable(test_opencv_node
                  src/test_opencv_node.cpp
@@ -46,19 +53,22 @@ else()
 endif()
 
 ### Testing
+include(CTest)
 enable_testing()
 
-add_executable(test_basic_function
+add_executable(cpp_path_planning_tests
+                 tests/test_main.cpp
+                 tests/test_astar.cpp
                  tests/test_basic_function.cpp
 )
 
-target_link_libraries(
-  test_basic_function
+target_link_libraries(cpp_path_planning_tests
   GTest::gtest_main
+  cpp_path_planning
 )
 
 include(GoogleTest)
-gtest_discover_tests(test_basic_function)
+gtest_discover_tests(cpp_path_planning_tests)
 
 ### End of testing
 
