@@ -19,13 +19,37 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libgtest-dev libopencv-dev
+        sudo apt-get install -y doxygen libgtest-dev libopencv-dev lcov
 
-    - name: Create build directory
-      run: cmake -S . -B build
+    - name: Create build directory and configure project
+      run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Coverage
 
     - name: Build project
-      run: cmake --build build --config Release
+      run: cmake --build build --config Coverage
 
-    - name: Run tests
-      run: cd build && ctest --output-on-failure
+    - name: Run tests and collect coverage
+      run: |
+        cd build
+        ctest -T Test -T Coverage
+
+    - name: Capture coverage data
+      run: |
+        cd build
+        lcov --capture --directory . --output-file coverage.info
+        lcov --remove coverage.info '/usr/*' --output-file coverage.info
+
+    - name: Generate HTML report
+      run: |
+        cd build
+        genhtml coverage.info --output-directory coverage-report
+
+    - name: Upload coverage to Codecov
+      run: |
+        bash <(curl -s https://codecov.io/bash) -f build/coverage.info
+
+    - name: Upload coverage report to GitHub Pages
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: build/coverage-report
