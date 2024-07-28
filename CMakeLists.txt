@@ -8,6 +8,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # OpenCV
 find_package(OpenCV REQUIRED)
 
+# Google Test
+find_package(GTest REQUIRED)
+
 # Note to test OpenCV works as intended
 add_executable(test_opencv_node
                  src/test_opencv_node.cpp
@@ -23,8 +26,24 @@ target_include_directories(cpp_path_planning
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
-# For later, if needed
-# target_link_libraries(cpp_path_planning PUBLIC ${OpenCV_LIBS})
+
+
+### Testing
+enable_testing()
+
+add_executable(test_basic_function
+                 tests/test_basic_function.cpp
+)
+
+target_link_libraries(
+  test_basic_function
+  GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(test_basic_function)
+
+### End of testing
 
 # Specify the install rules - for executables
 install(TARGETS test_opencv_node

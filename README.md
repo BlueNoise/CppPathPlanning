@@ -10,12 +10,13 @@ Path planning algorithms
 - CMake 3.22.1
 - GCC 11.4.0
 - OpenCV 4.5.4
+- GoogleTest 1.11.0-3
 
 # Dependencies installation
 
 ```bash
 sudo apt update
-sudo apt install libopencv-dev
+sudo apt install libgtest-dev libopencv-dev
 ```
 
 # Build
