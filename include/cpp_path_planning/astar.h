@@ -9,6 +9,7 @@ namespace cpp_path_planning
     {
     public:
         AStar(int x, int y);
+        void createGrid(int x, int y);
 
     private:
         int x_;
