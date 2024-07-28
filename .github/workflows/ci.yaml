@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: sudo apt-get install -y libgtest-dev libopencv-dev
+
+    - name: Create build directory
+      run: cmake -S . -B build
+
+    - name: Build project
+      run: cmake --build build --config Release
+
+    - name: Run tests
+      run: cd build && ctest --output-on-failure
